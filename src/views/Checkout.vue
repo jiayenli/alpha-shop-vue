@@ -3,6 +3,11 @@
     <!--導覽列-->
     <Navbars />
     <div class="container main-container">
+      <!--Modal-->
+      <CheckOutModal 
+      v-if ="finishedCheckOut"
+      :user="user"
+      @final-step-submit="finalStepSubmit"/>
       <div class="main-grid">
         <!--結帳主頁面-左側-->
         <div class="left-content">
@@ -14,16 +19,20 @@
             :initial-user="user"
             @step-after-submit="stepAfterSubmit"
             @step-before-submit="stepBeforeSubmit"
+            @final-step-submit="finalStepSubmit"
           />
         </div>
         <!--結帳主頁面-右側-->
         <div class="right-content">
           <ShoppingCartPanel 
-          :initial-items="items"
-          :delivery="user.delivery" />
+          :initial-items="items" 
+          :delivery="user.delivery"
+          :initialTotleCost="user.totleCost"
+          @totle-Cost-Update="totleCostUpdate"/>
         </div>
       </div>
     </div>
+
     <!--FOOTER-->
     <Footer />
   </main>
@@ -36,6 +45,7 @@ import StepPanel from "../components/StepPanel.vue";
 import ShoppingCartPanel from "../components/ShoppingCartPanel.vue";
 import Navbars from "../components/Navbars.vue";
 import Footer from "../components/Footer.vue";
+import CheckOutModal from "../components/CheckOutModal.vue";
 
 export default {
   components: {
@@ -43,6 +53,7 @@ export default {
     ShoppingCartPanel,
     Navbars,
     Footer,
+    CheckOutModal,
   },
 
   data() {
@@ -55,12 +66,13 @@ export default {
         city: "",
         address: "",
         id: -1,
-        delivery: "",
+        delivery: -1,
         payerName: "",
         cardNumber: "",
         goodThru: "",
         CVC: "",
         formStep: "",
+        totleCost: 0,
       },
       items: [
         {
@@ -78,27 +90,37 @@ export default {
           id: 2,
         },
       ],
+      finishedCheckOut: false
     };
   },
 
   methods: {
     startFormStep() {
-      if (this.$route.name === 'address') {
-        this.user.formStep = 1
-      } else if (this.$route.name === 'delivery') {
-        this.user.formStep = 2
-      } else if (this.$route.name === 'payment') {
-        this.user.formStep = 3
+      if (this.$route.name === "address") {
+        this.user.formStep = 1;
+      } else if (this.$route.name === "delivery") {
+        this.user.formStep = 2;
+      } else if (this.$route.name === "payment") {
+        this.user.formStep = 3;
       }
     },
 
     stepAfterSubmit() {
-     this.user.formStep += 1
+      this.user.formStep += 1;
     },
 
     stepBeforeSubmit() {
       this.user.formStep -= 1;
     },
+
+    totleCostUpdate(payment) {
+      this.user.totleCost = payment.newtotleCost
+    },
+
+    finalStepSubmit() {
+      console.log(this.user)
+      this.finishedCheckOut= !this.finishedCheckOut 
+    }
   },
 
   created() {

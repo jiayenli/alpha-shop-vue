@@ -12,7 +12,7 @@
                 <input
                   name="fee"
                   type="radio"
-                  value="0"
+                  value= 0
                   class="free"
                   v-model="user.delivery"
                 />
@@ -31,7 +31,7 @@
                 <input
                   name="fee"
                   type="radio"
-                  value="500"
+                  value= 500
                   class="fee"
                   v-model="user.delivery"
                 />
@@ -48,8 +48,13 @@
         </div>
         <!--按鈕-->
         <div id="btn-control" class="control-panel">
-          <button class="btn btn-outline"  @click.stop.prevent="ReturnStep">上一步</button>
-          <button class="btn btn-primary ml-4" @click.stop.prevent="NextStep">下一步</button>
+          <button class="btn btn-outline" @click.stop.prevent="ReturnStep">
+            <i class="fas fa-arrow-left"></i> 
+            上一步
+          </button>
+          <button class="btn btn-primary ml-4" @click.stop.prevent="NextStep">
+            下一步 <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </form>
     </div>
@@ -61,39 +66,40 @@
 </style>
 
 <script>
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 export default {
-  
-    props: {
+  props: {
     initialUser: {
       type: Object,
       default: () => ({
-       delivery: 0,
+        delivery: 0,
       }),
     },
   },
   data() {
     return {
-      user: this.initialUser
-      
+      user: this.initialUser,
     };
   },
 
   methods: {
     NextStep() {
-      console.log(this.user)
-       if (!this.user.delivery) {
-        Swal.fire("注意！", "請選擇運送方式", 'warning');
+      if (!this.user.delivery) {
+        Swal.fire({
+          title: "注意！",
+          text: "請選擇運送方式",
+          icon: "warning",
+          confirmButtonColor: "#f67599",
+        });
         return;
       }
       this.$emit("step-after-submit");
-      this.$router.push({ name: 'payment'})
+      this.$router.push({ name: "payment" });
     },
     ReturnStep() {
-      this.$emit("step-before-submit")
-      this.$router.push({ name: 'address'})
-
-    }
+      this.$emit("step-before-submit");
+      this.$router.push({ name: "address" });
+    },
   },
 };
 </script>

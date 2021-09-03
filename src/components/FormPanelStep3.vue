@@ -9,7 +9,12 @@
             <!--持卡人姓名-->
             <div class="form-row card-name">
               <label for="">持卡人姓名</label>
-              <input id="name" type="text" placeholder="John Doe" v-model="user.payerName" />
+              <input
+                id="name"
+                type="text"
+                placeholder="John Doe"
+                v-model="user.payerName"
+              />
             </div>
             <!--卡號-->
             <div class="form-row card-number">
@@ -25,20 +30,34 @@
               <!--有效日期-->
               <div class="form-row date">
                 <label for="">有效日期</label>
-                <input id="name" type="number" placeholder="MM/YY" v-model="user.goodThru"/>
+                <input
+                  id="name"
+                  type="number"
+                  placeholder="MM/YY"
+                  v-model="user.goodThru"
+                />
               </div>
               <!--CVC/CCV-->
               <div class="form-row CVC">
                 <label for="">CVC/CCV</label>
-                <input id="name" type="number" placeholder="123" v-model="user.CVC" />
+                <input
+                  id="name"
+                  type="number"
+                  placeholder="123"
+                  v-model="user.CVC"
+                />
               </div>
             </div>
           </div>
         </div>
         <!--按鈕-->
         <div id="btn-control" class="control-panel">
-          <button class="btn btn-outline"  @click.stop.prevent="ReturnStep">上一步</button>
-          <button class="btn btn-primary ml-4" @click.stop.prevent="NextStep">下一步</button>
+          <button class="btn btn-outline" @click.stop.prevent="ReturnStep">
+            <i class="fas fa-arrow-left"></i> 上一步
+          </button>
+          <button class="btn btn-primary ml-4" @click.stop.prevent="FinalStep">
+            確認下單 <i class="fas fa-check-circle"></i>
+          </button>
         </div>
       </form>
     </div>
@@ -68,25 +87,29 @@ export default {
 
   data() {
     return {
-      user: this.initialUser
+      user: this.initialUser,
     };
   },
 
   methods: {
-    NextStep() {
+    FinalStep() {
       //console.log(this.receiverInfo)
       const { payerName, cardNumber, goodThru, CVC } = this.user;
-      if (!payerName || !cardNumber || !goodThru || !CVC ) {
-        Swal.fire("注意！", "請確認所有欄位皆已填寫", "warning");
+      if (!payerName || !cardNumber || !goodThru || !CVC) {
+        Swal.fire({
+          title: "注意！",
+          text: "請確認所有欄位皆已填寫",
+          icon: "warning",
+          confirmButtonColor: "#f67599",
+        });
         return;
       }
-      this.$emit("step-after-submit");
+      this.$emit("final-step-submit");
     },
     ReturnStep() {
-      this.$emit("step-before-submit")
-      this.$router.push({ name: 'delivery'})
-
-    }
+      this.$emit("step-before-submit");
+      this.$router.push({ name: "delivery" });
+    },
   },
 };
 </script>

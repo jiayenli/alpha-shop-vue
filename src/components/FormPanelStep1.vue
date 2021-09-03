@@ -100,7 +100,7 @@
             class="btn btn-primary ml-4"
             @click.stop.prevent="NextStep"
           >
-            下一步
+            下一步 <i class="fas fa-arrow-right"></i>
           </button>
         </div>
       </form>
@@ -165,7 +165,11 @@ export default {
       //console.log(this.receiverInfo)
       const { gender, name, tel, email, city, address, id } = this.user;
       if (!gender || !name || !tel || !email || !city || !address || !id) {
-        Swal.fire("注意！", "請確認所有欄位皆已填寫", 'warning');
+        Swal.fire({
+          title: "注意！", 
+          text: "請確認所有欄位皆已填寫", 
+          icon: 'warning',
+          confirmButtonColor: '#f67599'});
         return;
       }
       this.$emit("step-after-submit");

@@ -1,6 +1,6 @@
 <template>
   <div class="card list-container">
-    <h4 class="shopping-car">購物籃</h4>
+    <h4 class="shopping-car">購物車</h4>
     <!--結帳主頁面-右側-購物清單-->
     <div class="shoppimg-list">
       <div class="item" v-for="item in items" :key="item.id">
@@ -31,7 +31,7 @@
       <div class="fee">
         <span class="fee-title">運費</span>
         <span class="fee-cost">
-          {{ delivery === "" ? "請選擇運送方式" : "$" + delivery }}</span
+          {{ delivery === -1 ? "請選擇運送方式" : "$" + delivery }}</span
         >
       </div>
       <div class="sum">
@@ -51,7 +51,6 @@ export default {
       required: true,
     },
     delivery: {
-      type: Number,
       required: true,
     },
   },
@@ -94,6 +93,7 @@ export default {
         this.totleCost += itemCost;
       });
       this.totleCost += Number(this.delivery)
+      this.$emit("totle-Cost-Update",{newtotleCost: this.totleCost});
     },
   },
 
