@@ -74,10 +74,7 @@ export default {
   },
   data() {
     return {
-      user: {
-        ...this.initialUser,
-        formStep: 3
-      },
+      user: this.initialUser
       
     };
   },
@@ -89,9 +86,7 @@ export default {
         Swal.fire("注意！", "請選擇運送方式", 'warning');
         return;
       }
-      this.$emit("step-after-submit", {        
-        formData: this.user,
-      });
+      this.$emit("step-after-submit");
       this.$router.push({ name: 'payment'})
     },
     ReturnStep() {

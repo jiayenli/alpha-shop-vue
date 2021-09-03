@@ -3,37 +3,26 @@
     <h4 class="shopping-car">購物籃</h4>
     <!--結帳主頁面-右側-購物清單-->
     <div class="shoppimg-list">
-      <div class="item">
+      <div class="item" v-for="item in items" :key="item.id">
         <div class="item-img" id="item-1-img">
-          <img src="https://i.ibb.co/vXLmvf0/1.jpg" />
+          <img :src="item.img" />
         </div>
         <div class="count-panel">
           <div class="item-part">
-            <p class="item-name">破洞補釘牛仔褲</p>
+            <p class="item-name">{{ item.name }}</p>
             <div class="count">
-              <div class="reduce-circle"></div>
-              <div class="item-num">1</div>
-              <div class="add-circle"></div>
+              <div
+                class="reduce-circle"
+                @click.stop.prevent="deleteAmount(item)"
+              ></div>
+              <div class="item-num">{{ item.amount }}</div>
+              <div
+                class="add-circle"
+                @click.stop.prevent="addAmount(item)"
+              ></div>
             </div>
           </div>
-          <div class="item-cost">$3,999</div>
-        </div>
-      </div>
-
-      <div class="item">
-        <div class="item-img" id="item-2-img">
-          <img src="https://i.ibb.co/qYnKGs7/2.jpg" />
-        </div>
-        <div class="count-panel">
-          <div class="item-part">
-            <p class="item-name">刷色直筒牛仔褲</p>
-            <div class="count">
-              <div class="reduce-circle"></div>
-              <div class="item-num">1</div>
-              <div class="add-circle"></div>
-            </div>
-          </div>
-          <div class="item-cost">$1,299</div>
+          <div class="item-cost">${{ item.price }}</div>
         </div>
       </div>
     </div>
@@ -41,13 +30,89 @@
     <div class="cal">
       <div class="fee">
         <span class="fee-title">運費</span>
-        <span class="fee-cost">免費</span>
+        <span class="fee-cost">
+          {{ delivery === "" ? "請選擇運送方式" : "$" + delivery }}</span
+        >
       </div>
       <div class="sum">
         <span class="sum-title">小計</span>
-        <span class="sum-cost">5,298</span>
+        <span class="sum-cost">${{ totleCost }}</span>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import Swal from "sweetalert2";
+export default {
+  props: {
+    initialItems: {
+      type: Array,
+      required: true,
+    },
+    delivery: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      items: this.initialItems,
+      totleCost: 0,
+    };
+  },
+
+  methods: {
+    addAmount(item) {
+      item.amount += 1;
+    },
+    deleteAmount(item) {
+      if (item.amount === 1) {
+        Swal.fire({
+          title: "商品將移除",
+          text: "確定將此商品移除購物車",
+          icon: "warning",
+          showCancelButton: true,
+          CancelButtonText: "取消",
+          confirmButtonColor: "#808080",
+          cancelButtonColor: "#2a2a2a",
+          cancelButtonText: "我再猶豫一下好了",
+          confirmButtonText: "確認",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.items = this.items.filter((_item) => _item.id !== item.id);
+          }
+        });
+        return;
+      }
+      item.amount -= 1;
+    },
+    totleCostChange() {
+      this.totleCost = 0;
+      this.items.map((item) => {
+        const itemCost = item.amount * item.price;
+        this.totleCost += itemCost;
+      });
+      this.totleCost += Number(this.delivery)
+    },
+  },
+
+  watch: {
+    items: {
+      handler: function () {
+        this.totleCostChange();
+      },
+      immediate: true,
+      deep: true,
+    },
+    delivery: {
+      handler: function () {
+        this.totleCostChange();
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
+};
+</script>
 

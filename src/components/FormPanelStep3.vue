@@ -68,9 +68,7 @@ export default {
 
   data() {
     return {
-      user: {
-        ...this.initialUser,
-      },
+      user: this.initialUser
     };
   },
 
@@ -82,9 +80,7 @@ export default {
         Swal.fire("注意！", "請確認所有欄位皆已填寫", "warning");
         return;
       }
-      this.$emit("step-after-submit", {
-        formData: this.user,
-      });
+      this.$emit("step-after-submit");
     },
     ReturnStep() {
       this.$emit("step-before-submit")

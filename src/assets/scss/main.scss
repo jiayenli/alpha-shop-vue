@@ -511,6 +511,7 @@ main {
               width: 26px;
               background-color: $light-gray;
               border-radius: 50%;
+              cursor: pointer;
             }
             .add-circle {
               &::after {

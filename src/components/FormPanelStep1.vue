@@ -156,11 +156,7 @@ export default {
         { name: "金門縣", id: "22" },
         { name: "連江縣", id: "23" },
       ],
-      user: {
-        ...this.initialUser,
-        formStep: 2,
-      },
-      
+      user: this.initialUser,     
     };
   },
 
@@ -172,9 +168,7 @@ export default {
         Swal.fire("注意！", "請確認所有欄位皆已填寫", 'warning');
         return;
       }
-      this.$emit("step-after-submit", {
-        formData: this.user,
-      });
+      this.$emit("step-after-submit");
       this.$router.push({ name: 'delivery'})
     },
   },

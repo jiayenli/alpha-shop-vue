@@ -7,21 +7,20 @@
         <!--結帳主頁面-左側-->
         <div class="left-content">
           <!--步驟控制-->
-          <StepPanel 
-          :formStep="user.formStep"/>
+          <StepPanel :formStep="user.formStep" />
 
           <!--表單內容-->
-          <router-view 
+          <router-view
             :initial-user="user"
             @step-after-submit="stepAfterSubmit"
             @step-before-submit="stepBeforeSubmit"
           />
-
-   
         </div>
         <!--結帳主頁面-右側-->
         <div class="right-content">
-          <ShoppingCartPanel />
+          <ShoppingCartPanel 
+          :initial-items="items"
+          :delivery="user.delivery" />
         </div>
       </div>
     </div>
@@ -34,9 +33,6 @@
 
 <script>
 import StepPanel from "../components/StepPanel.vue";
-//import FormPanelStep1 from "../components/FormPanelStep1.vue";
-////import FormPanelStep2 from "../components/FormPanelStep2.vue";
-//import FormPanelStep3 from "../components/FormPanelStep3.vue";
 import ShoppingCartPanel from "../components/ShoppingCartPanel.vue";
 import Navbars from "../components/Navbars.vue";
 import Footer from "../components/Footer.vue";
@@ -44,9 +40,6 @@ import Footer from "../components/Footer.vue";
 export default {
   components: {
     StepPanel,
-    //FormPanelStep1,
-    //FormPanelStep2,
-   // FormPanelStep3,
     ShoppingCartPanel,
     Navbars,
     Footer,
@@ -67,27 +60,49 @@ export default {
         cardNumber: "",
         goodThru: "",
         CVC: "",
-        formStep: 1,
+        formStep: "",
       },
-      items: {
-        
-      }
+      items: [
+        {
+          name: "破洞補釘牛仔褲",
+          img: "https://i.ibb.co/vXLmvf0/1.jpg",
+          amount: 1,
+          price: 3999,
+          id: 1,
+        },
+        {
+          name: "刷色直筒牛仔褲",
+          img: "https://i.ibb.co/qYnKGs7/2.jpg",
+          amount: 1,
+          price: 1299,
+          id: 2,
+        },
+      ],
     };
   },
 
   methods: {
-    stepAfterSubmit(payload) {
-      const { formData} = payload;
-      console.log(formData);
-
-      this.user = {
-        ...this.user,
-        ...formData,
-      };
+    startFormStep() {
+      if (this.$route.name === 'address') {
+        this.user.formStep = 1
+      } else if (this.$route.name === 'delivery') {
+        this.user.formStep = 2
+      } else if (this.$route.name === 'payment') {
+        this.user.formStep = 3
+      }
     },
+
+    stepAfterSubmit() {
+     this.user.formStep += 1
+    },
+
     stepBeforeSubmit() {
       this.user.formStep -= 1;
     },
+  },
+
+  created() {
+    this.startFormStep();
   },
 };
 </script>
