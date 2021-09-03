@@ -7,11 +7,12 @@
         <!--結帳主頁面-左側-->
         <div class="left-content">
           <!--步驟控制-->
-          <StepPanel />
+          <StepPanel 
+          :formStep="user.formStep"/>
 
           <!--表單內容-->
           <router-view 
-            :initialUser="user"
+            :initial-user="user"
             @step-after-submit="stepAfterSubmit"
             @step-before-submit="stepBeforeSubmit"
           />
@@ -28,6 +29,8 @@
     <Footer />
   </main>
 </template>
+
+
 
 <script>
 import StepPanel from "../components/StepPanel.vue";
@@ -66,6 +69,9 @@ export default {
         CVC: "",
         formStep: 1,
       },
+      items: {
+        
+      }
     };
   },
 

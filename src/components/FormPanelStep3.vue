@@ -45,6 +45,12 @@
   </div>
 </template>
 
+
+<style lang="scss" scoped>
+@import "./../assets/scss/formpanel.scss";
+</style>
+
+
 <script>
 import Swal from "sweetalert2";
 export default {
