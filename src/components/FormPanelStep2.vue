@@ -85,13 +85,14 @@ export default {
         Swal.fire("注意！", "請選擇運送方式", 'warning');
         return;
       }
-      this.$emit("step-after-submit", {
-        
+      this.$emit("step-after-submit", {        
         formData: this.user,
       });
+      this.$router.push({ name: 'payment'})
     },
     ReturnStep() {
       this.$emit("step-before-submit")
+      this.$router.push({ name: 'address'})
 
     }
   },

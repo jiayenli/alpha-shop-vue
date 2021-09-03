@@ -171,6 +171,7 @@ export default {
       this.$emit("step-after-submit", {
         formData: this.user,
       });
+      this.$router.push({ name: 'delivery'})
     },
   },
 };

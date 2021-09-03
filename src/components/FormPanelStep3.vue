@@ -82,6 +82,7 @@ export default {
     },
     ReturnStep() {
       this.$emit("step-before-submit")
+      this.$router.push({ name: 'delivery'})
 
     }
   },

@@ -1,14 +1,46 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import AlphaShop from '../views/AlphaShop.vue'
+
+import Checkout from '../views/Checkout.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'AlphaShop',
-    component: AlphaShop
+    name: 'Home',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    redirect: '/AlphaShop/Checkout'
+  },
+
+  {
+    path: '/AlphaShop/Checkout',
+    name: 'Checkout',
+    component: Checkout,
+    redirect: '/AlphaShop/Checkout/address',
+    children: [
+      {
+        path: 'address',
+        name: 'address',
+        component: () => import('../components/FormPanelStep1.vue')
+
+      },
+      {
+        path: 'delivery',
+        name: 'delivery',
+        component:()=>import('../components/FormPanelStep2.vue')
+
+      },
+      {
+        path: 'payment',
+        name: 'payment',
+        component: () => import('../components/FormPanelStep3.vue')
+
+      },
+
+    ]
   },
   {
     path: '/about',
