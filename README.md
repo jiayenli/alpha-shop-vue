@@ -24,12 +24,6 @@
 * 使用者資料保留至local storage，重新整理仍可保留
 * 送出後會出現結帳結果
 
-## 待調整項目
-* 細節樣式需持續優化
-* 購物車的數字目前僅可使用按鈕調整，希望優化為可輸入數字
-* 按下一步時，目前僅有初步判斷是否有缺項，未來希望能一併判斷資料格式是否正確
-* 最後送出時modal出現，背景顏色不知道如何可以讓整個視窗都按掉(拉不滿)
-* scss程式碼仍需要整理
 
 ## 備註
 * alrt()功能樣式使用sweetalert2套件
@@ -52,10 +46,16 @@ npm install --save sweetalert2
 ![image](https://github.com/jiayenli/alpha-shop-vue/blob/main/src/assets/%E9%80%81%E5%87%BA%E5%BE%8C%E8%B7%B3%E5%87%BA%E7%B5%90%E5%B8%B3%E7%B5%90%E6%9E%9C.gif)
 
 
+## 待調整項目
+* 細節樣式需持續優化
+* 購物車的數字目前僅可使用按鈕調整，希望優化為可輸入數字
+* 按下一步時，目前僅有初步判斷是否有缺項，未來希望能一併判斷資料格式是否正確
+* 最後送出時modal出現，背景顏色不知道如何可以讓整個視窗都按掉(拉不滿)
+* scss程式碼仍需要整理
 
 
 
-## Project setup
+# Project setup
 ```
 npm install
 ```
