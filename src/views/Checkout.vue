@@ -31,7 +31,6 @@
             :initialTotleCost="user.totleCost"
             @totle-Cost-Update="totleCostUpdate"
             @delete-item="deleteItem"
-
           />
         </div>
       </div>
@@ -124,7 +123,6 @@ export default {
 
     deleteItem(payment) {
       this.items = payment.newItem;
-
     },
 
     finalStepSubmit() {
@@ -133,26 +131,28 @@ export default {
     },
 
     createStorageData() {
-       this.user= {
+      this.user = {
         ...this.user,
-        ...JSON.parse(localStorage.getItem(STORAGE_KEY))
-
-      }
-      this.items= JSON.parse(localStorage.getItem(STORAGE_ITEM)) || this.items
-
+        ...JSON.parse(localStorage.getItem(STORAGE_KEY)),
+      };
+      this.items = JSON.parse(localStorage.getItem(STORAGE_ITEM)) || this.items;
     },
 
     saveStorage() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user));
       localStorage.setItem(STORAGE_ITEM, JSON.stringify(this.items));
-     
     },
   },
 
   created() {
-    this.createStorageData()
+    this.createStorageData();
     this.startFormStep();
   },
+
+  updated() {
+    this.startFormStep();
+  },
+
   watch: {
     user: {
       handler: function () {
