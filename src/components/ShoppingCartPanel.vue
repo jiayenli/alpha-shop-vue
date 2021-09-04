@@ -31,7 +31,7 @@
       <div class="fee">
         <span class="fee-title">運費</span>
         <span class="fee-cost">
-          {{ delivery === -1 ? "請選擇運送方式" : "$" + delivery }}</span
+          {{ delivery === 0 ? "免運費" : "$" + delivery }}</span
         >
       </div>
       <div class="sum">

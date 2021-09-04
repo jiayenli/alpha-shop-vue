@@ -4,10 +4,11 @@
     <Navbars />
     <div class="container main-container">
       <!--Modal-->
-      <CheckOutModal 
-      v-if ="finishedCheckOut"
-      :user="user"
-      @final-step-submit="finalStepSubmit"/>
+      <CheckOutModal
+        v-if="finishedCheckOut"
+        :user="user"
+        @final-step-submit="finalStepSubmit"
+      />
       <div class="main-grid">
         <!--結帳主頁面-左側-->
         <div class="left-content">
@@ -24,11 +25,12 @@
         </div>
         <!--結帳主頁面-右側-->
         <div class="right-content">
-          <ShoppingCartPanel 
-          :initial-items="items" 
-          :delivery="user.delivery"
-          :initialTotleCost="user.totleCost"
-          @totle-Cost-Update="totleCostUpdate"/>
+          <ShoppingCartPanel
+            :initial-items="items"
+            :delivery="user.delivery"
+            :initialTotleCost="user.totleCost"
+            @totle-Cost-Update="totleCostUpdate"
+          />
         </div>
       </div>
     </div>
@@ -46,6 +48,8 @@ import ShoppingCartPanel from "../components/ShoppingCartPanel.vue";
 import Navbars from "../components/Navbars.vue";
 import Footer from "../components/Footer.vue";
 import CheckOutModal from "../components/CheckOutModal.vue";
+
+const STORAGE_KEY = "alpha-store-vue";
 
 export default {
   components: {
@@ -66,7 +70,7 @@ export default {
         city: "",
         address: "",
         id: -1,
-        delivery: -1,
+        delivery: 0,
         payerName: "",
         cardNumber: "",
         goodThru: "",
@@ -90,7 +94,7 @@ export default {
           id: 2,
         },
       ],
-      finishedCheckOut: false
+      finishedCheckOut: false,
     };
   },
 
@@ -114,17 +118,38 @@ export default {
     },
 
     totleCostUpdate(payment) {
-      this.user.totleCost = payment.newtotleCost
+      this.user.totleCost = payment.newtotleCost;
     },
 
     finalStepSubmit() {
-      console.log(this.user)
-      this.finishedCheckOut= !this.finishedCheckOut 
-    }
+      console.log(this.user);
+      this.finishedCheckOut = !this.finishedCheckOut;
+    },
+
+    createStorageData() {
+       this.user= {
+        ...this.user,
+        ...JSON.parse(localStorage.getItem(STORAGE_KEY))
+
+      }
+    },
+
+    saveStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user));
+    },
   },
 
   created() {
+    this.createStorageData()
     this.startFormStep();
+  },
+  watch: {
+    user: {
+      handler: function () {
+        this.saveStorage();
+      },
+      deep: true,
+    },
   },
 };
 </script>
