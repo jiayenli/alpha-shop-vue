@@ -30,6 +30,8 @@
             :delivery="user.delivery"
             :initialTotleCost="user.totleCost"
             @totle-Cost-Update="totleCostUpdate"
+            @delete-item="deleteItem"
+
           />
         </div>
       </div>
@@ -40,8 +42,6 @@
   </main>
 </template>
 
-
-
 <script>
 import StepPanel from "../components/StepPanel.vue";
 import ShoppingCartPanel from "../components/ShoppingCartPanel.vue";
@@ -50,6 +50,7 @@ import Footer from "../components/Footer.vue";
 import CheckOutModal from "../components/CheckOutModal.vue";
 
 const STORAGE_KEY = "alpha-store-vue";
+const STORAGE_ITEM = "alpha-store-item-vue";
 
 export default {
   components: {
@@ -121,6 +122,11 @@ export default {
       this.user.totleCost = payment.newtotleCost;
     },
 
+    deleteItem(payment) {
+      this.items = payment.newItem;
+
+    },
+
     finalStepSubmit() {
       console.log(this.user);
       this.finishedCheckOut = !this.finishedCheckOut;
@@ -132,10 +138,14 @@ export default {
         ...JSON.parse(localStorage.getItem(STORAGE_KEY))
 
       }
+      this.items= JSON.parse(localStorage.getItem(STORAGE_ITEM)) || this.items
+
     },
 
     saveStorage() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.user))
+      localStorage.setItem(STORAGE_ITEM, JSON.stringify(this.items));
+     
     },
   },
 

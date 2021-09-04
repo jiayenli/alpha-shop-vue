@@ -80,6 +80,7 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             this.items = this.items.filter((_item) => _item.id !== item.id);
+            this.$emit("delete-item",{newItem: this.items})
           }
         });
         return;
