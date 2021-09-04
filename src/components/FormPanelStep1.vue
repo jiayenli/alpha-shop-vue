@@ -17,9 +17,9 @@
                     v-model="user.gender"
                     required
                   >
-                    <option value="man">先生</option>
-                    <option value="woman">女士</option>
-                    <option value="all">不拘</option>
+                    <option value="先生">先生</option>
+                    <option value="小姐">小姐</option>
+                    <option value="先生/小姐">不拘</option>
                   </select>
                 </div>
               </div>

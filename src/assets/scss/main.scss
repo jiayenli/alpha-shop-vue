@@ -512,6 +512,11 @@ main {
               background-color: $light-gray;
               border-radius: 50%;
               cursor: pointer;
+                 &:hover {
+                background-color: $dark-gray;
+                color:white
+              }
+           
             }
             .add-circle {
               &::after {

@@ -66,7 +66,7 @@
 </style>
 
 <script>
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
 export default {
   props: {
     initialUser: {
@@ -84,15 +84,6 @@ export default {
 
   methods: {
     NextStep() {
-      if (!this.user.delivery) {
-        Swal.fire({
-          title: "注意！",
-          text: "請選擇運送方式",
-          icon: "warning",
-          confirmButtonColor: "#f67599",
-        });
-        return;
-      }
       this.$emit("step-after-submit");
       this.$router.push({ name: "payment" });
     },
