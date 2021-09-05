@@ -4,30 +4,30 @@
     <nav class="d-flex justify-content-between align-items-center header-nav">
       <div class="nav-left">
         <ul class="nav-list d-flex flex-row">
-          <li class="nav-item"><a class="nav-link" href="">男裝</a></li>
-          <li class="nav-item"><a class="nav-link" href="">女裝</a></li>
-          <li class="nav-item"><a class="nav-link" href="">最新消息</a></li>
-          <li class="nav-item"><a class="nav-link" href="">客製商品</a></li>
-          <li class="nav-item"><a class="nav-link" href="">聯絡我們</a></li>
+          <li class="nav-item"><router-link class="nav-link" to="/">男裝</router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/">女裝</router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/">最新消息</router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/">客製商品</router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/">聯絡我們</router-link></li>
         </ul>
       </div>
       <div class="nav-mid">
-        <a href="#" class="text-center"
+        <router-link to="/" class="text-center"
           ><img src="./../assets/AClogo.png"
-        /></a>
+        /></router-link>
       </div>
       <div class="nav-right">
         <ul class="nav-list d-flex flex-row">
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fas fa-search"></i></a>
+            <router-link to="/" class="nav-link"><i class="fas fa-search"></i></router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"
+            <router-link to="/" class="nav-link"
               ><i class="fas fa-shopping-cart"> </i
-            ></a>
+            ></router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="far fa-moon"></i></a>
+            <router-link to="/" class="nav-link"><i class="far fa-moon"></i></router-link>
           </li>
         </ul>
       </div>
