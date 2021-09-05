@@ -30,8 +30,8 @@
   display: flex;
   align-items: center;
   z-index: 5;
-
-  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;;
   .modal {
     border: white solid 3px;
     width: 30%;

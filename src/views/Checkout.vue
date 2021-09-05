@@ -1,14 +1,15 @@
 <template>
   <main id="main-content">
     <!--導覽列-->
+    <CheckOutModal
+      v-if="finishedCheckOut"
+      :user="user"
+      @final-step-submit="finalStepSubmit"
+    />
     <Navbars />
     <div class="container main-container">
       <!--Modal-->
-      <CheckOutModal
-        v-if="finishedCheckOut"
-        :user="user"
-        @final-step-submit="finalStepSubmit"
-      />
+
       <div class="main-grid">
         <!--結帳主頁面-左側-->
         <div class="left-content">
