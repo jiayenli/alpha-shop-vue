@@ -43,7 +43,7 @@ npm install --save sweetalert2
 #### 使用者資料保留至local storage，重新整理仍可保留
 ![image](https://github.com/jiayenli/alpha-shop-vue/blob/main/src/assets/%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E5%BE%8C%E8%B3%87%E6%96%99%E4%BB%8D%E4%BF%9D%E7%95%99.gif)
 #### 送出後會出現結帳結果
-![image](https://github.com/jiayenli/alpha-shop-vue/blob/main/src/assets/%E9%80%81%E5%87%BA%E5%BE%8C%E8%B7%B3%E5%87%BA%E7%B5%90%E5%B8%B3%E7%B5%90%E6%9E%9C.gif)
+![image](https://github.com/jiayenli/alpha-shop-vue/blob/main/src/assets/%E7%B5%90%E5%B8%B3%E8%B7%B3%E5%87%BAmodal.gif)
 
 
 ## 待調整項目
