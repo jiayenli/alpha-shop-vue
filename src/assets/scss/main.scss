@@ -329,7 +329,7 @@ main {
     background-color: white;
     position: relative;
     width: 100%;
-    margin: 0 auto;
+    margin: 40px auto 0;
     padding: 20px 20px 60px 20px;
     .main-grid {
       position: relative;
@@ -338,13 +338,18 @@ main {
 }
 
 .hamburger {
+  margin-top:15px;
   margin-left: 1rem;
-  display: inline;
+  display: inline-block;
 }
 .hamburger-logo {
-  margin: 1rem 0 0 3rem;
+  top:10px;
+  position: absolute;
+  right: 50%;
+  transform: translateX(75px);
+
   display: inline-block;
-  width: 50%;
+  width: 150px;
 }
 
 .navbar-toggle {
@@ -355,7 +360,7 @@ main {
 }
 
 .header-nav {
-  top: 4rem;
+  top: 5rem;
   background: #ffffff;
   align-items: center;
   position: absolute;
@@ -364,14 +369,18 @@ main {
   width: 100%;
   margin: 0 auto;
   display: none;
+  border-bottom: $light-gray 1px solid;
 
   // border: 1px green solid;
   .nav-left {
     .nav-list {
+      width: 100%;
       flex-direction: column;
     }
   }
   .nav-item {
+    
+    margin-top: 20px;
     height: 50px;
     text-align: center;
   }
@@ -379,6 +388,7 @@ main {
     margin: 16px;
     font-size: 16px;
     color: $light-black;
+    white-space:nowrap
     &:hover,
     &:visit {
       color: $gray;
@@ -433,8 +443,9 @@ main {
 
         position: relative;
         .circle-container {
-          display: inline-block;
-          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           height: 36px;
           width: 36px;
           background-color: $white;
@@ -443,7 +454,7 @@ main {
           margin: 0 auto;
           border: 1px $gray solid;
           font-size: 12px;
-          padding: 10px 0px;
+          font-weight: bold;
         }
         .label-container {
           color: $gray;
@@ -519,6 +530,10 @@ main {
            
             }
             .add-circle {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: bolder;
               &::after {
                 content: "+";
                 display: inline-block;
@@ -565,30 +580,35 @@ main {
   display: none;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 760px) {
   #main-app {
-    min-width: 760px;
+   // min-width: 760px;
   }
   .navbar-toggle {
     display: none;
   }
   .header-nav {
+     display: flex;
     position: relative;
     top: 0;
     flex-direction: row;
+    justify-content: space-between;
     height: 60px;
     width: 100%;
     max-width: 1100px;
     min-width: 760px;
+    border-bottom: $light-gray 0px solid;
     //margin: 0 auto;
-    display: inline;
-    display: flex;
+   
     // border: 1px green solid;
     .nav-left,
     .nav-right {
+      width: 50%;
       .nav-list {
         flex-direction: row;
+        white-space:nowrap;
         .nav-link {
+          font-weight: bolder;
           font-size: 14px;
           color: $light-black;
           &:hover,
@@ -598,16 +618,18 @@ main {
         }
       }
     }
+    .nav-right {
+      display: flex;
+      justify-content:flex-end
+
+    }
 
     .nav-item {
       height: 0px;
+      margin-top: 0px;
     }
     .nav-mid {
       display: block;
-      position: absolute;
-      width: 120px;
-      margin-right: 50%;
-      margin-left: 50%;
       margin-top: 20px;
     }
   }
@@ -639,13 +661,15 @@ main {
         .step {
           .label-container {
             display: inline;
+            font-weight: bold;
           }
           .circle-container {
+            display: flex;
             height: 24px;
             width: 24px;
-            margin: 0 5px 0 0;
+            margin-right: 5px;
             font-size: 12px;
-            padding: 4px 0px;
+            
           }
         }
         .connect-line {
@@ -680,6 +704,7 @@ main {
   }
 
   .footer {
+    width: 100%;
     display: flex;
     background-color: $light-gray;
     text-align: center;
